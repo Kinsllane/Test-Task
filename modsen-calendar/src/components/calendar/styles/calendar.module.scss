@@ -1,0 +1,5 @@
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
+.cell { background: #fff; border-radius: 10px; min-height: 150px; padding: 10px; cursor: pointer; transition: transform 0.2s ease; }
+.cell:hover { transform: translateY(-2px); }
+.event { background: #f1f3f5; margin-top: 8px; padding: 6px; border-radius: 6px; display: flex; justify-content: space-between; }
+.dropZone { border: 2px dashed #adb5bd; padding: 16px; border-radius: 10px; }

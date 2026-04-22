@@ -1,0 +1,26 @@
+/* CalendarPage — только Calendar + FavoritesList, без sidebar */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 377px;
+  gap: 49px;
+  min-height: 100vh;
+}
+
+@media (max-width: 1200px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 0;
+
+    /* FavoritesList скрывается на мобилке */
+    > *:last-child {
+      display: none;
+    }
+  }
+}

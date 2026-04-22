@@ -1,0 +1,136 @@
+.modal {
+  background: var(--white);
+  border-radius: 15px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 440px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 24px 16px;
+  border-bottom: 2px solid var(--grey-blue-97);
+}
+
+.title {
+  margin: 0;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--grey-blue-60);
+  line-height: 1.2;
+}
+
+.closeBtn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  color: var(--grey-blue-70);
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.15s ease, color 0.15s ease;
+  
+  &:hover {
+    background: var(--grey-blue-97);
+    color: var(--grey-blue-50);
+  }
+}
+
+.content {
+  padding: 24px;
+}
+
+.section {
+  margin-bottom: 24px;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.sectionTitle {
+  margin: 0 0 16px;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--grey-blue-60);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.infoRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: var(--grey-blue-98);
+  border-radius: 8px;
+}
+
+.label {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--grey-blue-70);
+  min-width: 60px;
+}
+
+.value {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--grey-blue-50);
+  flex: 1;
+}
+
+.divider {
+  height: 2px;
+  background: var(--grey-blue-97);
+  margin: 24px 0;
+}
+
+@media (max-width: 600px) {
+  .modal {
+    max-width: 100%;
+    border-radius: 12px;
+  }
+  
+  .header {
+    padding: 20px 20px 12px;
+  }
+  
+  .title {
+    font-size: 18px;
+  }
+  
+  .content {
+    padding: 20px;
+  }
+  
+  .section {
+    margin-bottom: 20px;
+  }
+  
+  .infoRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  
+  .label {
+    min-width: auto;
+  }
+}

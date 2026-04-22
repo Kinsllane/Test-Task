@@ -1,0 +1,393 @@
+.pageHeader {
+  padding: 35px 34px 0;
+  margin-bottom: 20px;
+}
+
+.pageTitle {
+  font-family: 'Alumni Sans SC', Arial, sans-serif;
+  font-size: 48px;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--brand-orange);
+  line-height: 1;
+}
+
+.toolbar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 0 34px;
+}
+
+.rangeLabel {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--grey-blue-60);
+  margin: 0 10px;
+  line-height: 20px;
+}
+
+.spacer { flex: 1; }
+
+.calendarFrame {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 30px 5px 30px 18px;
+  animation: appear 0.25s ease;
+  min-width: 0;
+  overflow-x: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.daysRow {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  align-items: center;
+  gap: 23px;
+  margin-bottom: 15px;
+  padding-right: 13px;
+}
+
+.timeSpacer {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.days {
+  display: grid;
+}
+
+.dayTitle {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 20px;
+  color: var(--grey-blue-60);
+  text-align: center;
+}
+
+.bodyRow {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 23px;
+  padding-right: 13px;
+}
+
+.timeCol {
+  position: relative;
+  width: 30px;
+  height: auto;
+}
+
+.timeIcon {
+  width: 30px;
+  height: 30px;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timeLabel {
+  height: 70px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 5px;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 20px;
+  color: var(--grey-blue-80);
+}
+
+.gridArea {
+  position: relative;
+  height: auto;
+  width: 100%;
+  min-width: 0;
+}
+
+.hLines {
+  position: absolute;
+  inset: 0;
+  display: grid;
+}
+
+.hLine {
+  border-top: 2px solid var(--grey-blue-97);
+}
+
+.vLines {
+  position: absolute;
+  inset: 0;
+  display: grid;
+}
+
+.vLine {
+  border-left: 2px solid var(--grey-blue-97);
+}
+
+.cells {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  pointer-events: none;
+}
+
+.dayCol {
+  display: grid;
+}
+
+.cell {
+  pointer-events: auto;
+}
+
+.eventsLayer {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  pointer-events: none;
+}
+
+.eventsCol {
+  display: grid;
+  position: relative;
+  pointer-events: none;
+}
+
+.eventCard {
+  pointer-events: auto;
+  width: auto;
+  border-radius: 5px;
+  border: 1px solid;
+  background: var(--orange-5);
+  padding: 10px 10px 8px;
+  margin: 0 4px;
+  position: relative;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+}
+
+.badges {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 35px;
+  height: 20px;
+  border-radius: 5px;
+  background: var(--orange);
+  padding: 0 7px;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 8px;
+  font-weight: 900;
+  line-height: 20px;
+  color: var(--white);
+  text-align: center;
+}
+
+.eventTitle {
+  margin-top: 8px;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 16px;
+  color: var(--grey-blue-50);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+.favBtn {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  opacity: 0.9;
+  color: var(--grey-blue-80);
+  font-size: 14px;
+  transition: color 0.15s ease, transform 0.15s ease;
+
+  &:hover {
+    opacity: 1;
+    color: var(--yellow);
+    transform: scale(1.1);
+  }
+}
+
+.favBtnActive {
+  color: var(--yellow);
+  opacity: 1;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (min-width: 961px) {
+  .calendarFrame {
+    overflow-x: auto;
+  }
+
+  .days {
+    min-width: 840px;
+  }
+
+  .gridArea {
+    min-width: 840px;
+  }
+
+  .eventCard {
+    padding: 10px 12px 8px;
+    margin: 0 6px;
+  }
+
+  .eventTitle {
+    font-size: 11px;
+    line-height: 16px;
+    -webkit-line-clamp: 3;
+  }
+}
+
+@media (max-width: 960px) {
+  .calendarFrame {
+    overflow-x: auto;
+  }
+
+  .eventTitle {
+    font-size: 9px;
+    line-height: 16px;
+    -webkit-line-clamp: 2;
+  }
+
+  .eventCard {
+    padding: 6px 6px 4px;
+    margin: 0 2px;
+  }
+}
+
+@media (max-width: 768px) {
+  .eventTitle {
+    font-size: 8px;
+    line-height: 14px;
+    -webkit-line-clamp: 1;
+  }
+
+  .eventCard {
+    padding: 4px 4px 2px;
+  }
+}
+
+@media (max-width: 600px) {
+  .pageHeader {
+    padding: 25px 15px 0;
+    margin-bottom: 15px;
+  }
+
+  .pageTitle {
+    font-size: 30px;
+  }
+
+  .toolbar {
+    flex-wrap: wrap;
+    gap: 4px;
+    row-gap: 6px;
+    margin-bottom: 8px;
+    padding: 0 15px;
+  }
+
+  .spacer {
+    display: none;
+  }
+
+  .calendarFrame {
+    padding: 8px 4px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .daysRow {
+    grid-template-columns: 12px 1fr;
+    gap: 12px;
+    margin-bottom: 4px;
+    align-items: center;
+  }
+
+  .bodyRow {
+    grid-template-columns: 12px 1fr;
+    gap: 12px;
+  }
+
+  .timeSpacer {
+    width: 12px;
+  }
+
+  .timeCol {
+    width: 12px;
+  }
+
+  .timeLabel {
+    font-size: 10px;
+    font-weight: 900;
+    color: #6b7a99;
+    justify-content: center;
+    padding: 0;
+    width: 12px;
+  }
+
+  .dayTitle {
+    font-size: 10px;
+    font-weight: 900;
+    color: #6b7a99;
+  }
+
+  .gridArea {
+    min-width: unset;
+    width: 100%;
+  }
+
+  .eventTitle {
+    font-size: 8px;
+    line-height: 11px;
+    margin-top: 4px;
+    -webkit-line-clamp: 1;
+  }
+
+  .eventCard {
+    padding: 2px 3px;
+    margin: 0;
+    border-radius: 2px;
+  }
+
+  .badges {
+    display: none;
+  }
+
+  .rangeLabel {
+    font-size: 11px;
+    margin: 0 4px;
+  }
+}

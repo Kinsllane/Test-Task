@@ -1,0 +1,294 @@
+.form {
+  width: 440px;
+  background: #ffffff;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── Header (91px) ─────────────────────────────────────── */
+.header {
+  height: 91px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  flex-shrink: 0;
+}
+
+.titleSearch {
+  flex: 1;
+  min-width: 0; // предотвращает overflow в flex-контейнере
+}
+
+.titleInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 20px;
+  color: #7d8fb3;
+
+  &::placeholder {
+    color: #7d8fb3;
+  }
+}
+
+.headerActions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  flex-shrink: 0;
+}
+
+/* Обёртка для двух кнопок — выглядит как единый контрол */
+.colorGroupBtn {
+  display: inline-flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #f5f6f7;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.colorDotBtn {
+  width: 48px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-right: 1px solid #f5f6f7;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.15s ease;
+
+  &:hover:not(:disabled) {
+    background: #f5f6f7;
+  }
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.7;
+  }
+}
+
+.expandBtn {
+  width: 48px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.15s ease;
+
+  &:hover:not(:disabled) {
+    background: #f5f6f7;
+  }
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.7;
+  }
+}
+
+/* ── Divider line ──────────────────────────────────────── */
+.line {
+  height: 2px;
+  background: #f5f6f7;
+  flex-shrink: 0;
+}
+
+.lineVertical {
+  width: 2px;
+  background: #f5f6f7;
+  align-self: stretch;
+  flex-shrink: 0;
+}
+
+/* ── Content area ──────────────────────────────────────── */
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Row (icon + field), 60px tall ────────────────────── */
+.row {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 0;
+  background: #ffffff;
+}
+
+/* Date + Time in one row, split by vertical line */
+.rowDouble {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+}
+
+.rowHalf {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 0;
+}
+
+.rowIcon {
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-right: 15px;
+}
+
+.fieldInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 20px;
+  color: #7d8fb3;
+
+  &::placeholder {
+    color: #7d8fb3;
+  }
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.8;
+  }
+}
+
+.fieldError {
+  font-size: 10px;
+  color: #e05252;
+  padding: 0 20px 4px;
+  margin-top: -4px;
+}
+
+/* ── Actions ───────────────────────────────────────────── */
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px 20px 20px;
+}
+
+/* ── Color picker (hidden dot indicator in header) ─────── */
+.colorDot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 1.5px solid rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+}
+
+/* ── Color picker popover ──────────────────────────────── */
+.colorPickerWrap {
+  position: relative;
+}
+
+.colorPopover {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #f5f6f7;
+  border-radius: 8px;
+  padding: 8px;
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.colorSwatch {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+@media (max-width: 480px) {
+  .form {
+    width: min(440px, 96vw);
+  }
+}
+
+/* ── Mobile 360px — по макету "Add Event" 248px ─────────── */
+@media (max-width: 360px) {
+  .form {
+    width: 100%;
+    border-radius: 15px;
+  }
+
+  .header {
+    height: 60px;
+    padding: 0 11px;
+  }
+
+  /* На мобилке дата и время — отдельные строки (не rowDouble) */
+  .rowDouble {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .rowHalf {
+    width: 100%;
+    height: 50px;
+    padding: 0 11px;
+
+    &:first-child {
+      border-bottom: 2px solid #f5f6f7;
+    }
+  }
+
+  .lineVertical {
+    display: none;
+  }
+
+  .row {
+    height: 50px;
+    padding: 0 11px;
+  }
+
+  .rowIcon {
+    margin-right: 10px;
+  }
+
+  .actions {
+    padding: 12px 11px 16px;
+  }
+}
