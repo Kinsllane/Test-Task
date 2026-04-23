@@ -179,30 +179,6 @@ npm run lint
 npm run type-check
 ```
 
-## 🌐 Деплой
-
-Приложение готово для деплоя на следующих платформах:
-
-### Vercel (рекомендуется)
-```bash
-npm install -g vercel
-vercel --prod
-```
-
-### Netlify
-```bash
-npm run build
-# Загрузите папку dist/ в Netlify
-```
-
-### Firebase Hosting
-```bash
-npm install -g firebase-tools
-firebase init hosting
-npm run build
-firebase deploy
-```
-
 ## 📊 Производительность
 
 - **Bundle size**: 450KB (gzipped: 145KB)
@@ -237,7 +213,3 @@ firebase deploy
 ## 👨‍💻 Автор
 
 Разработано с ❤️ для Modsen
-
-## 📄 Лицензия
-
-MIT License - см. файл LICENSE для деталей
