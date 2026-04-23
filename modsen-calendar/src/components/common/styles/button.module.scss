@@ -130,8 +130,8 @@
 .auth {
   background: #ee5757;
   border-radius: 8.61px;
-  width: 100%;
-  max-width: 434px;
+  width: 100% !important;
+  max-width: none !important;
   height: 59px;
   font-family: 'Source Sans Pro', Arial, sans-serif;
   font-size: 15.79px;
@@ -139,9 +139,9 @@
   color: var(--white);
   padding: 0;
   margin-top: 25px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
+  text-align: center;
+  line-height: 59px;
   
   &:hover { 
     background: #d94848;
@@ -152,10 +152,21 @@
 @media (max-width: 968px) {
   .auth {
     border-radius: 5.57px;
-    max-width: 280px;
+    max-width: none !important;
+    width: 100% !important;
     height: 42px;
     font-size: 15.31px;
-    margin-top: 23px;
+    margin-top: 20px;
+    line-height: 42px;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth {
+    height: 40px;
+    font-size: 14px;
+    margin-top: 16px;
+    line-height: 40px;
   }
 }
 

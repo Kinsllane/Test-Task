@@ -1,4 +1,3 @@
-/* ── Page wrapper ───────────────────────────────────────── */
 .wrap {
   width: 100vw;
   height: 100vh;
@@ -9,7 +8,6 @@
   overflow: hidden;
 }
 
-/* ── Two-column container ───────────────────────────────── */
 .authContainer {
   display: flex;
   align-items: center;
@@ -21,9 +19,7 @@
   box-sizing: border-box;
 }
 
-/* ── Left: image card ───────────────────────────────────── */
 .imageSection {
-  /* карточка с отступами, как на скриншоте */
   flex: 0 0 auto;
   width: min(420px, 40vw);
   height: min(680px, 88vh);
@@ -37,8 +33,6 @@
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.18);
   flex-shrink: 0;
 }
-
-/* фото на весь блок */
 .authImage {
   position: absolute;
   inset: 0;
@@ -49,7 +43,6 @@
   z-index: 0;
 }
 
-/* все текстовые блоки поверх фото */
 .imageTop,
 .imageDots,
 .imageBottom {
@@ -57,7 +50,6 @@
   z-index: 1;
 }
 
-/* ── Верхний текст ── */
 .imageTop {
   text-align: center;
 }
@@ -79,7 +71,6 @@
   margin: 0;
 }
 
-/* ── Точки пагинации ── */
 .imageDots {
   display: flex;
   gap: 6px;
@@ -103,7 +94,6 @@
   background: rgba(150, 191, 255, 0.85);
 }
 
-/* ── Нижний текст ── */
 .imageBottom {
   text-align: center;
 }
@@ -125,7 +115,6 @@
   line-height: 1.4;
 }
 
-/* ── Right: form section ────────────────────────────────── */
 .formSection {
   flex: 1;
   max-width: 500px;
@@ -150,7 +139,6 @@
   width: 100%;
 }
 
-/* ── Form typography ────────────────────────────────────── */
 .title {
   font-family: 'Source Sans Pro', Arial, sans-serif;
   font-size: 25.84px;
@@ -191,7 +179,6 @@
   margin-top: 10px;
 }
 
-/* ── Tablet ─────────────────────────────────────────────── */
 @media (max-width: 1024px) {
   .authContainer {
     gap: 40px;
@@ -209,20 +196,23 @@
   }
 }
 
-/* ── Mobile: скрываем картинку ──────────────────────────── */
 @media (max-width: 768px) {
   .wrap {
     background: #ffffff;
     align-items: flex-start;
+    overflow-y: auto;
+    height: auto;
+    min-height: 100vh;
   }
 
   .authContainer {
     flex-direction: column;
     align-items: center;
-    padding: 40px 24px;
+    padding: 20px 16px;
     gap: 0;
     height: auto;
     min-height: 100vh;
+    box-sizing: border-box;
   }
 
   .imageSection {
@@ -234,6 +224,7 @@
     width: 100%;
     align-items: center;
     padding: 0;
+    overflow-y: visible;
   }
 
   .logo {
@@ -244,15 +235,44 @@
 
   .card {
     padding: 0;
+    width: 100%;
+    max-width: 400px;
   }
 
   .title {
     font-size: 22px;
+    text-align: center;
   }
 
   .authLink {
     font-size: 10px;
     margin-bottom: 16px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .authContainer {
+    padding: 16px 12px;
+  }
+
+  .logo {
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+
+  .title {
+    font-size: 20px;
+    margin-bottom: 4px;
+  }
+
+  .authLink {
+    font-size: 9px;
+    margin-bottom: 12px;
+  }
+
+  .card {
+    max-width: 100%;
   }
 }
 

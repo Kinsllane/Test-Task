@@ -11,6 +11,13 @@ import { useAppDispatch, useAppSelector } from '@/common/reduxHooks';
 import { setUser } from '@/store/authSlice';
 import { setLoading } from '@/store/uiSlice';
 
+const formStyles = {
+  width: '100%',
+  display: 'flex',
+  flexDirection: 'column' as const,
+  gap: '12px'
+};
+
 export const RegisterForm = () => {
   const dispatch = useAppDispatch();
   const loading = useAppSelector((s) => s.ui.loading);
@@ -27,7 +34,7 @@ export const RegisterForm = () => {
       firstName: latinRegExp.test(firstName) ? '' : '2-50 latin symbols',
       lastName: latinRegExp.test(lastName) ? '' : '2-50 latin symbols',
       email: emailRegExp.test(email) ? '' : 'example@domain.com',
-      password: passwordRegExp.test(password) ? '' : 'Min 8: Aa1!',
+      password: passwordRegExp.test(password) ? '' : 'Minimum 8 characters: uppercase, lowercase, number, special character',
       confirm: password === confirm ? '' : 'Passwords do not match'
     }),
     [firstName, lastName, email, password, confirm]
@@ -40,7 +47,14 @@ export const RegisterForm = () => {
     try {
       dispatch(setLoading(true));
       const user = await registerUser(email, password, firstName, lastName);
-      dispatch(setUser({ firstName, lastName, email: user.email ?? email }));
+      dispatch(
+        setUser({
+          firstName,
+          lastName,
+          email: user.email ?? email,
+          photoURL: user.photoURL ?? undefined
+        })
+      );
       showToast('Registration success');
       navigate('/');
     } catch (error) {
@@ -51,7 +65,7 @@ export const RegisterForm = () => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} style={formStyles}>
       <Input
         label="First name"
         placeholder="Martin"

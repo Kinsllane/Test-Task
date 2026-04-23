@@ -3,6 +3,7 @@ import { useAppSelector, useAppDispatch } from '@/common/reduxHooks';
 import { clearUser } from '@/store/authSlice';
 import { logoutUser } from '@/api/firebaseAuth';
 import { SettingsModal } from './SettingsModal';
+import { ProfileModal } from './ProfileModal';
 import styles from '@/components/sidebar/styles/Sidebar.module.scss';
 import calendarIcon from '@/assets/icons/calendar.svg';
 import twitterIcon from '@/assets/icons/twitter.svg';
@@ -10,11 +11,13 @@ import facebookIcon from '@/assets/icons/facebook.svg';
 import instagramIcon from '@/assets/icons/instagram.svg';
 import githubIcon from '@/assets/icons/github.svg';
 import settingsPng from '@/assets/icons/settings-instance.png';
+import defaultAvatar from '@/assets/avatars/avatar-1.svg';
 
 export const Sidebar = () => {
   const user = useAppSelector((s) => s.auth.user);
   const dispatch = useAppDispatch();
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
 
   const handleLogout = async () => {
     if (window.confirm('Are you sure you want to logout?')) {
@@ -36,9 +39,18 @@ export const Sidebar = () => {
             <img src={settingsPng} alt="" width={32} height={30} />
           </button>
 
-          <div className={styles.avatarWrap}>
-            <div className={styles.avatarCircle} />
-          </div>
+          <button
+            className={styles.avatarWrap}
+            onClick={() => setProfileOpen(true)}
+            type="button"
+            aria-label="Edit profile"
+          >
+            <img 
+              src={user?.photoURL ?? defaultAvatar} 
+              alt="Profile" 
+              className={styles.avatarImage} 
+            />
+          </button>
 
           <div className={styles.userName}>{user?.firstName ? `Hello ${user.firstName}` : 'Hello Rosalie'}</div>
           <div className={styles.userEmail}>{user?.email ?? 'rosalie.rice@gmail.com'}</div>
@@ -91,6 +103,8 @@ export const Sidebar = () => {
         userName={user?.firstName}
         userEmail={user?.email}
       />
+
+      <ProfileModal open={profileOpen} onClose={() => setProfileOpen(false)} />
     </>
   );
 };

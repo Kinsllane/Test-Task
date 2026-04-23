@@ -2,14 +2,33 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CalendarEvent } from '@/common/types';
 import { LS_EVENTS_KEY } from '@/common/constants';
 
-const getInitial = (): CalendarEvent[] => {
-  const raw = localStorage.getItem(LS_EVENTS_KEY);
-  return raw ? (JSON.parse(raw) as CalendarEvent[]) : [];
+const getInitialEvents = (): CalendarEvent[] => {
+  try {
+    const raw = localStorage.getItem(LS_EVENTS_KEY);
+    if (!raw) return [];
+    
+    const parsed = JSON.parse(raw) as CalendarEvent[];
+    
+    if (!Array.isArray(parsed)) {
+      console.warn('Invalid events data in localStorage, resetting to empty array');
+      return [];
+    }
+    
+    return parsed.filter(event => 
+      event && 
+      typeof event.id === 'string' && 
+      typeof event.title === 'string' &&
+      typeof event.date === 'string'
+    );
+  } catch (error) {
+    console.error('Failed to parse events from localStorage:', error);
+    return [];
+  }
 };
 
 const eventsSlice = createSlice({
   name: 'events',
-  initialState: getInitial(),
+  initialState: getInitialEvents(),
   reducers: {
     addEvent: (state, action: PayloadAction<CalendarEvent>) => {
       state.push(action.payload);
@@ -17,7 +36,13 @@ const eventsSlice = createSlice({
     updateEventTitle: (state, action: PayloadAction<{ id: string; title: string }>) => {
       const item = state.find((event) => event.id === action.payload.id);
       if (item) {
-        item.title = action.payload.title;
+        item.title = action.payload.title.trim();
+      }
+    },
+    updateEvent: (state, action: PayloadAction<CalendarEvent>) => {
+      const index = state.findIndex((event) => event.id === action.payload.id);
+      if (index !== -1) {
+        state[index] = action.payload;
       }
     },
     moveEvent: (
@@ -32,16 +57,16 @@ const eventsSlice = createSlice({
       }
     },
     deleteEvent: (state, action: PayloadAction<string>) =>
-      state.filter((event) => event.id !== action.payload),
-    toggleFavoriteFlag: (state, action: PayloadAction<string>) => {
-      const item = state.find((event) => event.id === action.payload);
-      if (item) {
-        item.isFavorite = !item.isFavorite;
-      }
-    }
+      state.filter((event) => event.id !== action.payload)
   }
 });
 
-export const { addEvent, updateEventTitle, deleteEvent, moveEvent, toggleFavoriteFlag } =
-  eventsSlice.actions;
+export const { 
+  addEvent, 
+  updateEventTitle, 
+  updateEvent,
+  deleteEvent, 
+  moveEvent 
+} = eventsSlice.actions;
+
 export default eventsSlice.reducer;

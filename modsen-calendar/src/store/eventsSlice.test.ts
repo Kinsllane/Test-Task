@@ -11,8 +11,7 @@ describe('event add module', () => {
         date: '21.04.2026',
         duration: '10:00-11:00',
         description: 'Daily sync',
-        color: '#0d6efd',
-        isFavorite: false
+        color: '#0d6efd'
       })
     );
 

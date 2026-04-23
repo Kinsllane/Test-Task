@@ -1,5 +1,6 @@
 import { CalendarEvent } from '@/common/types';
 import { toUiDate } from '@/utils/formatters';
+import { truncateText } from '@/utils/validators';
 import styles from '@/components/calendar/styles/calendar.module.scss';
 
 interface Props {
@@ -44,7 +45,7 @@ export const WeekView = ({ map, onCellClick, onEventClick, onDropEvent, onFav }:
               style={{ borderLeft: `4px solid ${item.color}` }}
               className={styles.event}
             >
-              {item.title}
+              {truncateText(item.title)}
               <button onClick={(e) => { e.stopPropagation(); onFav(item.id); }}>★</button>
             </article>
           ))}

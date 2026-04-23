@@ -2,7 +2,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  updateProfile
+  updateProfile,
+  updateEmail
 } from 'firebase/auth';
 import { getFirebaseAuth } from '@/services/firebase';
 
@@ -26,4 +27,28 @@ export const loginUser = (email: string, password: string) => {
 export const logoutUser = () => {
   const auth = getFirebaseAuth();
   return signOut(auth);
+};
+
+export const updateUserProfile = async (data: {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+}) => {
+  const auth = getFirebaseAuth();
+  const user = auth.currentUser;
+
+  if (!user) {
+    throw new Error('User not authenticated');
+  }
+
+  if (data.firstName || data.lastName) {
+    const displayName = `${data.firstName ?? user.displayName?.split(' ')[0] ?? ''} ${data.lastName ?? user.displayName?.split(' ')[1] ?? ''}`.trim();
+    await updateProfile(user, { displayName });
+  }
+
+  if (data.email && data.email !== user.email) {
+    await updateEmail(user, data.email);
+  }
+
+  return user;
 };

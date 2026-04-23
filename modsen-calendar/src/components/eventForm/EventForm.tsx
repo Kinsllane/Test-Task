@@ -59,7 +59,7 @@ export const EventForm = ({ initial, date, presetDuration, onSave, onDelete }: P
   const isDurationOk = durationRegExp.test(duration);
   const canSave = isTitleOk && (initial ? true : isPlaceOk && isDateOk && isDurationOk);
 
-  const titleError = useMemo(() => (isTitleOk ? '' : 'Title is required, max 20 symbols'), [isTitleOk]);
+  const titleError = useMemo(() => (isTitleOk ? '' : 'Title is required, max 40 symbols'), [isTitleOk]);
   const placeError = useMemo(() => (initial || isPlaceOk ? '' : 'Place is required, max 20 symbols'), [initial, isPlaceOk]);
   const dateError = useMemo(() => (initial || isDateOk ? '' : 'Date format: DD.MM.YYYY'), [initial, isDateOk]);
   const durationError = useMemo(
@@ -77,8 +77,7 @@ export const EventForm = ({ initial, date, presetDuration, onSave, onDelete }: P
       date: initial?.date ?? eventDate,
       duration: initial?.duration ?? duration,
       description,
-      color,
-      isFavorite: initial?.isFavorite ?? false
+      color
     });
   };
 
@@ -156,7 +155,7 @@ export const EventForm = ({ initial, date, presetDuration, onSave, onDelete }: P
             onChange={(e) => setPlace(e.target.value)}
             placeholder="Add Place"
             disabled={Boolean(initial)}
-            maxLength={20}
+            maxLength={40}
             aria-label="Event place"
           />
         </div>

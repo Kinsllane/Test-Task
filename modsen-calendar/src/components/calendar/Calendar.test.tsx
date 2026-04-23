@@ -8,6 +8,16 @@ import authReducer from '@/store/authSlice';
 import uiReducer from '@/store/uiSlice';
 import { Calendar } from '@/components/calendar/Calendar';
 
+global.ResizeObserver = jest.fn().mockImplementation(() => ({
+  observe: jest.fn(),
+  unobserve: jest.fn(),
+  disconnect: jest.fn(),
+}));
+
+jest.mock('@/services/notification', () => ({
+  notifyUpcomingEvent: jest.fn(),
+}));
+
 describe('calendar render module', () => {
   test('renders day/week controls', () => {
     const store = configureStore({

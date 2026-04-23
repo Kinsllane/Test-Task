@@ -6,9 +6,10 @@ interface Props {
   open: boolean;
   onClose: () => void;
   children: ReactNode;
+  title?: string;
 }
 
-export const Modal = ({ open, onClose, children }: Props) => {
+export const Modal = ({ open, onClose, children, title }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
   useClickOutside(ref, onClose);
 
@@ -27,6 +28,7 @@ export const Modal = ({ open, onClose, children }: Props) => {
   return (
     <div className={styles.overlay}>
       <div ref={ref} className={styles.modal}>
+        {title && <h2 className={styles.modalTitle}>{title}</h2>}
         {children}
       </div>
     </div>

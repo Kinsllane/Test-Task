@@ -1,4 +1,5 @@
 import { useAppSelector } from '@/common/reduxHooks';
+import { truncateText } from '@/utils/validators';
 import styles from '@/components/favorites/styles/favorites.module.scss';
 
 export const FavoritesList = () => {
@@ -14,7 +15,7 @@ export const FavoritesList = () => {
         <div key={event.id} className={styles.item} style={{ borderLeftColor: event.color }}>
           <div className={styles.itemTop}>
             <span className={styles.star}>★</span>
-            <span>{event.title}</span>
+            <span>{truncateText(event.title)}</span>
           </div>
           <div className={styles.meta}>
             {event.date} • {event.duration}

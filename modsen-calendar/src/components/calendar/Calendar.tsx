@@ -1,13 +1,14 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/common/reduxHooks';
 import { setView } from '@/store/calendarSlice';
-import { addEvent, deleteEvent, moveEvent, toggleFavoriteFlag, updateEventTitle } from '@/store/eventsSlice';
+import { addEvent, deleteEvent, moveEvent, updateEventTitle } from '@/store/eventsSlice';
 import { toggleFavorite } from '@/store/favoritesSlice';
 import { Modal } from '@/components/common/Modal';
 import { EventForm } from '@/components/eventForm/EventForm';
 import { Button } from '@/components/common/Button';
 import { Segmented } from '@/components/common/Segmented';
 import { CalendarEvent } from '@/common/types';
+import { truncateText } from '@/utils/validators';
 import { notifyUpcomingEvent } from '@/services/notification';
 import { toUiDate } from '@/utils/formatters';
 import styles from '@/components/calendar/styles/calendar-page.module.scss';
@@ -59,6 +60,7 @@ export const Calendar = () => {
   const dispatch = useAppDispatch();
   const { view } = useAppSelector((s) => s.calendar);
   const events = useAppSelector((s) => s.events);
+  const favorites = useAppSelector((s) => s.favorites);
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedDuration, setSelectedDuration] = useState('');
   const [editing, setEditing] = useState<CalendarEvent | null>(null);
@@ -284,13 +286,12 @@ export const Calendar = () => {
                           <div className={styles.badges}>
                             <span className={styles.badge}>{from}</span>
                           </div>
-                          <div className={styles.eventTitle}>{item.title}</div>
+                          <div className={styles.eventTitle}>{truncateText(item.title)}</div>
                           <button
-                            className={`${styles.favBtn} ${item.isFavorite ? styles.favBtnActive : ''}`}
+                            className={`${styles.favBtn} ${favorites.includes(item.id) ? styles.favBtnActive : ''}`}
                             onClick={(e) => {
                               e.stopPropagation();
                               dispatch(toggleFavorite(item.id));
-                              dispatch(toggleFavoriteFlag(item.id));
                             }}
                           >
                             ★

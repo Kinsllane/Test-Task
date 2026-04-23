@@ -11,6 +11,13 @@ import { IconButton } from '@/components/common/IconButton';
 import eyeHide from '@/assets/icons/eye-hide.svg';
 import { setLoading } from '@/store/uiSlice';
 
+const formStyles = {
+  width: '100%',
+  display: 'flex',
+  flexDirection: 'column' as const,
+  gap: '12px'
+};
+
 export const LoginForm = () => {
   const dispatch = useAppDispatch();
   const loading = useAppSelector((s) => s.ui.loading);
@@ -27,7 +34,14 @@ export const LoginForm = () => {
       dispatch(setLoading(true));
       const res = await loginUser(email, password);
       const [firstName = '', lastName = ''] = (res.user.displayName ?? '').split(' ');
-      dispatch(setUser({ email: res.user.email ?? email, firstName, lastName }));
+      dispatch(
+        setUser({
+          email: res.user.email ?? email,
+          firstName,
+          lastName,
+          photoURL: res.user.photoURL ?? undefined
+        })
+      );
       navigate('/');
     } catch (error) {
       showToast(getFirebaseErrorMessage(error));
@@ -37,7 +51,7 @@ export const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} style={formStyles}>
       <Input
         label="Email"
         placeholder="Enter Email"
